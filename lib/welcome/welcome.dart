@@ -135,25 +135,25 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.grey.shade200,
-                        offset: Offset(2, 4),
-                        blurRadius: 5,
-                        spreadRadius: 2)
-                  ],
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xfffbb448), Color(0xffe46b10)])),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: Colors.grey.shade200,
+                      offset: Offset(2, 4),
+                      blurRadius: 5,
+                      spreadRadius: 2)
+                ],
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xfffbb448), Color(0xffe46b10)])),
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +162,7 @@ class _WelcomeState extends State<Welcome> {
                     cor: false,
                   ),
                   SizedBox(
-                    height: 80,
+                    height: 50,
                   ),
                   _submitButton("Login"),
                   SizedBox(
@@ -180,8 +180,8 @@ class _WelcomeState extends State<Welcome> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -190,11 +190,11 @@ class _WelcomeState extends State<Welcome> {
     try {
       const androidString = const AndroidAuthMessages(
           fingerprintHint: 'Vamos registrar sua impressão digital',
-          fingerprintSuccess: 'oi success',
+          fingerprintSuccess: 'Sucesso',
           cancelButton: 'cancelar',
           goToSettingsButton: 'Configurações',
           goToSettingsDescription: 'Por favor configure seu Touch ID.',
-          signInTitle: "Acesso a Biomeria",
+          signInTitle: "Biometria",
           fingerprintRequiredTitle: 'Por favor reative seu Touch ID');
 
       bool isAuthenticated = await _auth.authenticateWithBiometrics(
@@ -205,11 +205,9 @@ class _WelcomeState extends State<Welcome> {
       );
       if (isAuthenticated) {
         push(context, HomeBook());
-      } else {
-        print("NOT OK");
       }
     } on PlatformException catch (e) {
-      print(e);
+      opsAlert(context, "Seu aparelho não tem acesso a biometria");
     }
   }
 
