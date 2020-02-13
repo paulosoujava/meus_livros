@@ -190,11 +190,11 @@ class _WelcomeState extends State<Welcome> {
     try {
       const androidString = const AndroidAuthMessages(
           fingerprintHint: 'Vamos registrar sua impressão digital',
-          fingerprintSuccess: 'oi success',
+          fingerprintSuccess: 'Sucesso',
           cancelButton: 'cancelar',
           goToSettingsButton: 'Configurações',
           goToSettingsDescription: 'Por favor configure seu Touch ID.',
-          signInTitle: "Acesso a Biomeria",
+          signInTitle: "Biometria",
           fingerprintRequiredTitle: 'Por favor reative seu Touch ID');
 
       bool isAuthenticated = await _auth.authenticateWithBiometrics(
